@@ -113,18 +113,3 @@ class Activation(Layer):
         return self.ip_grad, None, None 
 
 
-# Implementing the model 
-dataset = pd.read_excel('Folds5x2_pp.xlsx')
-X = dataset.iloc[:, :-1].values
-y = dataset.iloc[:, -1].values.reshape(-1, 1)  # Reshaping target to (n_samples, 1)
-from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
-
-
-ann=Model()
-ann.add(Dense(6))
-ann.add(Activation(6,'relu'))
-ann.add(Dense(6))
-ann.add(Activation(6,'relu'))
-ann.add(Dense(1))
-ann.train(X_train,y_train,25,0.1)
